@@ -35,82 +35,88 @@ public class Player {
 
         bounds.set(position.x, position.y, 15, 20);
 
-        boolean collision = false;
-
         for (Block block : blocks) {
-            if (collides(block)) {
-                Gdx.app.log("Collides", "true");
-                if (position.y < block.getPosition().y && position.x > block.getPosition().x - 15 && position.x < block.getPosition().x + 20) {
-                    Gdx.app.log("Collides", "bottom");
-                    position.y = block.getPosition().y - 20;
-                    velocity.y = 0;
-//                    acceleration.y = 0;
-                } else if (position.y >= block.getPosition().y) {
-                    if (position.x >= block.getPosition().x) {
-                        Gdx.app.log("Collides", "right side");
-                        position.x = block.getPosition().x + 20;
-                        stopMoving();
-                    } else if (position.x <= block.getPosition().x) {
-                        Gdx.app.log("Collides", "left side");
-                        position.x = block.getPosition().x - 15;
-                        stopMoving();
+            if (collides(position, bounds, block)) {
+
+                float xOverlapLeft = Math.abs(position.x + 15 - block.getPosition().x);
+                float xOverlapRight = Math.abs(block.getPosition().x + 20 - position.x);
+
+                float yOverlapTop = Math.abs(position.y + 20 - block.getPosition().y);
+                float yOverlapBottom = Math.abs(block.getPosition().y + 20 - position.y);
+
+                float xOverlap = xOverlapLeft < xOverlapRight ? xOverlapLeft : xOverlapRight;
+                float yOverlap = yOverlapTop < yOverlapBottom ? yOverlapTop : yOverlapBottom;
+
+                System.out.println("yOverlap: " + yOverlap);
+                System.out.println("xOverlap: " + xOverlap);
+
+                if (yOverlap < xOverlap + 1) {
+                    if (yOverlapTop < yOverlapBottom) {
+                        position.y = block.getPosition().y - 20;
+                    } else {
+                        position.y = block.getPosition().y + 20;
                     }
+                    velocity.y = 0;
+                } else {
+                    if (xOverlapLeft < xOverlapRight) {
+                        position.x = block.getPosition().x - 15;
+                    } else {
+                        position.x = block.getPosition().x + 20;
+                    }
+                    stopMoving();
                 }
-                collision = true;
+                System.out.println();
                 break;
             }
         }
 
-//        if (!collision) {
-//            if (isLeftKeyPressed()) {
-//                moveLeft();
-//            } else if (isRightKeyPressed()) {
-//                moveRight();
-//            }
-//        }
+        // Allows player to continue moving left / right after jumping over an obstacle
+        Vector2 tmpPos = new Vector2();
+        float tmpVelX = isRightKeyPressed() ? 100 : isLeftKeyPressed() ? -100 : 0;
+        float tmpVelY = velocity.y;
+        tmpVelX *= delta;
+        tmpVelY *= delta;
+        tmpPos.x = position.x + tmpVelX;
+        tmpPos.y = position.y + tmpVelY;
+        Rectangle tmpBounds = new Rectangle(tmpPos.x, tmpPos.y, 15, 20);
 
-        Gdx.app.log("x", Float.toString(position.x));
-        Gdx.app.log("y", Float.toString(position.y));
+        boolean collision = false;
 
-//        if (!collision) {
-//            velocity.y = 100;
-//        }
+        for (Block b : blocks) {
+            if (collides(tmpPos, tmpBounds, b))
+                collision = true;
+        }
 
-//        if (!collision) {
-//            acceleration.y = 460;
-//        }
-
-//        if (position.y + 20 >= 180) {
-////            position.y = 162;
-//            velocity.y = 0;
-//            acceleration.y = 0;
-//        } else {
-//            acceleration.y = 460;
-//        }
-
-//        if (position.y + 12 > GS.SCREEN_HEIGHT) {
-//            velocity.y = 100;
-//        }
+        if (!collision) {
+            System.out.println("MOVING");
+            if (isRightKeyPressed()) {
+                moveRight();
+            }
+            if (isLeftKeyPressed()) {
+                moveLeft();
+            }
+        }
     }
 
-    public boolean collides(Block block) {
-        if (Math.abs(position.x - block.getPosition().x) < 20 && Math.abs(position.y + 20 - block.getPosition().y) < 25) {
+    public boolean collides(Vector2 position, Rectangle bounds, Block block) {
+        if (Math.abs(position.x - block.getPosition().x) < 20 && Math.abs(position.y - block.getPosition().y) < 40) {
             return (Intersector.overlaps(bounds, block.getBounds()));
         }
         return false;
     }
 
     public void jump() {
+        System.out.println("JUMP");
         velocity.y = -200;
         acceleration.y = 460;
     }
 
     public void moveRight() {
-        velocity.x = 200;
+        velocity.x = 100;
     }
 
     public void moveLeft() {
-        velocity.x = -200;
+        velocity.x = -100;
     }
 
     public void stopMoving() {
