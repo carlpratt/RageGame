@@ -17,7 +17,7 @@ public class GameWorld {
     private List<Block> blocks = new ArrayList<Block>();
 
     public GameWorld() {
-        player = new Player(100, 100);
+        player = new Player(GS.PLAYER_START_X, GS.PLAYER_START_Y);
         blocks = createBlocks(readLevel());
     }
 
@@ -50,7 +50,7 @@ public class GameWorld {
             everything = sb.toString();
             Gdx.app.log("Everything", everything);
         } catch (Exception e) {
-
+            // Nothing
         }
         return everything;
     }

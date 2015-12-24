@@ -2,11 +2,12 @@ package com.cpratt.gameobjects;
 
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
+import com.cpratt.settings.GS;
 
 public class Block {
 
-    private int width = 20;
-    private int height = 20;
+    private int width = GS.BLOCK_WIDTH;
+    private int height = GS.BLOCK_HEIGHT;
 
     private Vector2 position;
     private Rectangle bounds;

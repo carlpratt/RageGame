@@ -32,7 +32,9 @@ public class GameRenderer {
     private TextureRegion bg, grass;
     private Animation birdAnimation;
     private TextureRegion birdMid, birdDown, birdUp;
-    private TextureRegion skullUp, skullDown, bar, bricks, playerAsset;
+    private TextureRegion skullUp, skullDown, bar, bricks, playerAssetLeft, playerAssetRight;
+
+    private TextureRegion lastPlayerAsset;
 
     BufferedReader br;
     String everything;
@@ -102,6 +104,18 @@ public class GameRenderer {
         batcher.enableBlending();
         batcher.end();
 
+        TextureRegion playerAsset;
+
+        if (player.getVelocity().x > 0) {
+            playerAsset = playerAssetRight;
+            lastPlayerAsset = playerAssetRight;
+        } else if (player.getVelocity().x < 0) {
+            playerAsset = playerAssetLeft;
+            lastPlayerAsset = playerAssetLeft;
+        } else {
+            playerAsset = lastPlayerAsset != null ? lastPlayerAsset : playerAssetRight;
+        }
+
         batcher.begin();
         batcher.draw(playerAsset, player.getX(), player.getY(), 15, 20);
         batcher.end();
@@ -127,6 +141,7 @@ public class GameRenderer {
 //        skullDown = AssetLoader.skullDown;
 //        bar = AssetLoader.bar;
         bricks = AssetLoader.bricks;
-        playerAsset = AssetLoader.player;
+        playerAssetLeft = AssetLoader.playerLeft;
+        playerAssetRight = AssetLoader.playerRight;
     }
 }

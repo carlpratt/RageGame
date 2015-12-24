@@ -8,9 +8,9 @@
        bbbb         b
       bbbbb         b
 b    bbbbbb         b
-    bbbbbbb         b
-   bbbbbbbb         b
-bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+    bbbbbbb         d
+   bbbbbbbb
+bbbbbbbbbbbbbbbbbbbbbbb
 
 
 24x16

@@ -20,6 +20,7 @@ public class InputHandler implements InputProcessor {
     @Override
     public boolean keyDown(int keycode) {
         switch (keycode) {
+            // TODO: Find out what class these enums exist in
             case 19 :
                 player.setUpKeyPressed(true);
                 if (player.getVelocity().y == 0) {

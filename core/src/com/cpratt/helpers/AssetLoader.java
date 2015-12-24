@@ -7,13 +7,13 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
 public class AssetLoader {
 
-    public static Texture brickTexture, playerTexture;
+    public static Texture brickTexture, playerTextureLeft, playerTextureRight;
     public static TextureRegion bg, grass;
 
     public static Animation birdAnimation;
     public static TextureRegion bird, birdDown, birdUp;
 
-    public static TextureRegion skullUp, skullDown, bar, bricks, player;
+    public static TextureRegion skullUp, skullDown, bar, bricks, playerLeft, playerRight;
 
     public static void load() {
 
@@ -23,12 +23,17 @@ public class AssetLoader {
         bricks = new TextureRegion(brickTexture, 0, 0, 1024, 1024);
         bricks.flip(false, true);
 
-        playerTexture = new Texture(Gdx.files.internal("data/mario.png"));
-        playerTexture.setFilter(Texture.TextureFilter.Nearest, Texture.TextureFilter.Nearest);
+        playerTextureRight = new Texture(Gdx.files.internal("data/marioRight.png"));
+        playerTextureRight.setFilter(Texture.TextureFilter.Nearest, Texture.TextureFilter.Nearest);
 
-        player = new TextureRegion(playerTexture, 0, 0, 480, 640);
-        player.flip(false, true);
+        playerRight = new TextureRegion(playerTextureRight, 0, 0, 480, 640);
+        playerRight.flip(false, true);
 
+        playerTextureLeft = new Texture(Gdx.files.internal("data/marioLeft.png"));
+        playerTextureLeft.setFilter(Texture.TextureFilter.Nearest, Texture.TextureFilter.Nearest);
+
+        playerLeft = new TextureRegion(playerTextureLeft, 0, 0, 480, 640);
+        playerLeft.flip(false, true);
 
 
 //        bricks = new TextureRegion(texture, 0, 0, 1024, 1024);
@@ -66,7 +71,8 @@ public class AssetLoader {
     public static void dispose() {
         // We must dispose of the texture when we are finished.
         brickTexture.dispose();
-        playerTexture.dispose();
+        playerTextureRight.dispose();
+        playerTextureLeft.dispose();
     }
 
 }
