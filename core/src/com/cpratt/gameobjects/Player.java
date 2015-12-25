@@ -110,4 +110,9 @@ public class Player {
     public void setAlive(boolean alive) {
         this.alive = alive;
     }
+
+    public void reset() {
+        this.position = new Vector2(GS.PLAYER_START_X, GS.PLAYER_START_Y);
+        this.alive = true;
+    }
 }

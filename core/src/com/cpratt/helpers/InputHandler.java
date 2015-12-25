@@ -3,18 +3,23 @@ package com.cpratt.helpers;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputProcessor;
 import com.cpratt.gameobjects.Player;
+import com.cpratt.gameworld.GameWorld;
 
 public class InputHandler implements InputProcessor {
 
+    private GameWorld world;
     private Player player;
 
-    public InputHandler(Player player) {
-        this.player = player;
+    public InputHandler(GameWorld world) {
+        this.world = world;
+        this.player = world.getPlayer();
     }
 
     @Override
     public boolean touchDown(int screenX, int screenY, int pointer, int button) {
-        player.jump();
+        if (world.isGameOver()) {
+            world.restart();
+        }
         return true;
     }
 

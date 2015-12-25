@@ -4,6 +4,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.Animation;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
@@ -13,6 +14,7 @@ import com.cpratt.helpers.AssetLoader;
 import com.cpratt.settings.GS;
 
 import java.io.BufferedReader;
+import java.util.List;
 
 public class GameRenderer {
 
@@ -25,6 +27,7 @@ public class GameRenderer {
 
     // Game Objects
     private Player player;
+    private List<Block> blocks;
 
     // Game Assets
     private TextureRegion bg, grass;
@@ -78,7 +81,7 @@ public class GameRenderer {
         batcher.begin();
         batcher.disableBlending();
 
-        for (Block block : world.getBlocks()) {
+        for (Block block : blocks) {
             batcher.draw(bricks, block.getPosition().x, block.getPosition().y, block.getWidth(), block.getHeight());
 //            shapeRenderer.begin(ShapeRenderer.ShapeType.Filled);
 //            shapeRenderer.setColor(Color.RED);
@@ -109,10 +112,19 @@ public class GameRenderer {
 //        shapeRenderer.setColor(Color.GREEN);
 //        shapeRenderer.rect(player.getBounds().getX(), player.getBounds().getY(), player.getBounds().getWidth(), player.getBounds().getHeight());
 //        shapeRenderer.end();
+
+        if (world.isGameOver()) {
+            batcher.begin();
+            BitmapFont font = new BitmapFont(true);
+            font.setScale(2);
+            font.drawMultiLine(batcher, "     GAME OVER\n (Click to continue)", player.getX(), 100);
+            batcher.end();
+        }
     }
 
     private void initGameObjects() {
         player = world.getPlayer();
+        blocks = world.getBlocks();
     }
 
     private void initAssets() {

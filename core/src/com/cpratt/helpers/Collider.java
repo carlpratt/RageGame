@@ -19,7 +19,7 @@ public class Collider {
             if (collides(player.getPosition(), player.getBounds(), block)) {
 //                System.out.println("COLLIDES");
 
-                if (TrapBlock.class.isInstance(block)) {
+                if (block instanceof TrapBlock) {
                     player.setAlive(false);
                 }
 
@@ -85,8 +85,7 @@ public class Collider {
 
         if (player.getPosition().y > GS.SCREEN_HEIGHT) {
             System.out.println("DEAD");
-            Vector2 pos = new Vector2(GS.PLAYER_START_X, GS.PLAYER_START_Y);
-            player.setPosition(pos);
+            System.out.println(player.getY());
             player.setAlive(false);
         }
     }

@@ -8,6 +8,8 @@ import com.cpratt.helpers.LevelBuilder;
 import com.cpratt.settings.GS;
 
 import java.util.List;
+import java.util.concurrent.TimeUnit;
+import java.util.logging.Level;
 
 public class GameWorld {
 
@@ -15,40 +17,74 @@ public class GameWorld {
 
     private List<Block> blocks;
 
-    private GameState gameState;
+    private GameState currentState;
 
     public enum GameState {
-        RUNNING, GAMEOVER
+        READY, RUNNING, GAMEOVER
     }
 
     public GameWorld() {
         player = new Player(GS.PLAYER_START_X, GS.PLAYER_START_Y);
         blocks = LevelBuilder.buildLevel();
-        gameState = GameState.RUNNING;
+        currentState = GameState.RUNNING;
     }
 
     public void update(float delta) {
-        switch (gameState) {
+        switch (currentState) {
+            case READY:
+                updateReady(delta);
+                break;
             case RUNNING:
-                player.update(delta);
-                Collider.handleCollisions(player, blocks, delta);
+                updateRunning(delta);
                 break;
             case GAMEOVER:
-                restart();
+//                restart();
                 break;
             default:
                 break;
         }
+    }
+
+    private void updateReady(float delta) {
+
+    }
+
+    private void updateRunning(float delta) {
+        if (delta > .15f) {
+            delta = .15f;
+        }
+
+        player.update(delta);
+        Collider.handleCollisions(player, blocks, delta);
 
         if (!player.isAlive()) {
-            gameState = GameState.GAMEOVER;
+            currentState = GameState.GAMEOVER;
         }
     }
 
+    public boolean isReady() {
+        return currentState == GameState.READY;
+    }
+
+    public void start() {
+        currentState = GameState.RUNNING;
+    }
+
     public void restart() {
-        gameState = GameState.RUNNING;
-        player.setAlive(true);
-        player.setPosition(new Vector2(GS.PLAYER_START_X, GS.PLAYER_START_Y));
+        try {
+//            Thread.sleep(1000);
+        } catch (Exception e) {
+            // nothing
+        }
+        player.reset();
+        blocks = LevelBuilder.buildLevel();
+//        blocks = LevelBuilder.buildLevel();
+        currentState = GameState.RUNNING;
+
+    }
+
+    public boolean isGameOver() {
+        return currentState == GameState.GAMEOVER;
     }
 
     public Player getPlayer() {
