@@ -5,6 +5,7 @@ import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.cpratt.gameobjects.Block;
 import com.cpratt.gameobjects.Player;
+import com.cpratt.gameobjects.TrapBlock;
 import com.cpratt.settings.GS;
 
 import java.util.List;
@@ -17,6 +18,10 @@ public class Collider {
         for (Block block : blocks) {
             if (collides(player.getPosition(), player.getBounds(), block)) {
 //                System.out.println("COLLIDES");
+
+                if (TrapBlock.class.isInstance(block)) {
+                    player.setAlive(false);
+                }
 
                 // Calculate overlaps between player and colliding block. Used to determine player final destination relative to block
                 float xOverlapLeft = Math.abs(player.getPosition().x + GS.PLAYER_WIDTH - block.getPosition().x);

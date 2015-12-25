@@ -4,7 +4,7 @@ import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.cpratt.settings.GS;
 
-public class Block {
+public abstract class Block {
 
     private int width = GS.BLOCK_WIDTH;
     private int height = GS.BLOCK_HEIGHT;
@@ -12,9 +12,13 @@ public class Block {
     private Vector2 position;
     private Rectangle bounds;
 
+    public Block() {
+
+    }
+
     public Block(int x, int y) {
-        position = new Vector2(x, y);
-        bounds = new Rectangle(x, y, width, height);
+        this.position = new Vector2(x, y);
+        this.bounds = new Rectangle(x, y, width, height);
     }
 
     public int getWidth() {

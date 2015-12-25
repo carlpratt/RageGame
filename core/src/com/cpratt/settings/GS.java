@@ -9,7 +9,7 @@ public class GS {
     // Movement
     public static int ZERO = 0; // Dumb, but makes it slightly easier to track down where the value 0 is used.
 
-    public static int PLAYER_LATERAL_VELOCITY = 65;
+    public static int PLAYER_LATERAL_VELOCITY = 75;
     public static int PLAYER_VERTICAL_VELOCITY = -200;
 
     public static int GRAVITY_ACCELERATION = 250;

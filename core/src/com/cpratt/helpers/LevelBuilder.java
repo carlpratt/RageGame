@@ -1,7 +1,9 @@
 package com.cpratt.helpers;
 
 import com.badlogic.gdx.Gdx;
+import com.cpratt.gameobjects.BasicBlock;
 import com.cpratt.gameobjects.Block;
+import com.cpratt.gameobjects.TrapBlock;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -43,14 +45,22 @@ public class LevelBuilder {
         int y = 0;
         for (Character c : everything.toCharArray()) {
 //            Gdx.app.log("Char", c.toString());
-            if (c.equals('b')) {
-                blocks.add(new Block(x, y));
-                x += 20;
-            } else if (c.equals('\n')) {
-                y += 20;
-                x = 0;
-            } else {
-                x += 20;
+            switch(c) {
+                case 'b' :
+                    blocks.add(new BasicBlock(x, y));
+                    x += 20;
+                    break;
+                case 'c' :
+                    blocks.add(new TrapBlock(x, y));
+                    x += 20;
+                    break;
+                case '\n' :
+                    y += 20;
+                    x = 0;
+                    break;
+                default :
+                    x += 20;
+                    break;
             }
         }
         return blocks;
