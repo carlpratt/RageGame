@@ -52,25 +52,12 @@ public class GameRenderer {
 
         initGameObjects();
         initAssets();
-
-        try {
-            br = new BufferedReader(new FileReader("/Users/cpratt/dev/private/RageGame/core/src/com/cpratt/levels/01.txt"));
-            StringBuilder sb = new StringBuilder();
-            String line = br.readLine();
-
-            while (line != null) {
-                sb.append(line);
-                sb.append(System.lineSeparator());
-                line = br.readLine();
-            }
-            everything = sb.toString();
-            Gdx.app.log("Everything", everything);
-        } catch (Exception e) {
-
-        }
     }
 
     public void render(float runTime) {
+        cam.position.x = player.getX() + GS.CAMERA_OFFSET_X;
+        cam.update();
+        batcher.setProjectionMatrix(cam.combined);
 
         // We will move these outside of the loop for performance later.
 //        Bird bird = myWorld.getBird();

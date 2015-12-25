@@ -9,7 +9,7 @@
       bbbbb         b
 b    bbbbbb         b
     bbbbbbb         d
-   bbbbbbbb
+                      bb                     bb
 bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
 
 

@@ -31,6 +31,8 @@ public class Player {
         velocity.add(acceleration.cpy().scl(delta));
         position.add(velocity.cpy().scl(delta));
         bounds.set(position.x, position.y, GS.PLAYER_WIDTH, GS.PLAYER_HEIGHT);
+        System.out.println(position);
+        System.out.println();
     }
 
     public void jump() {

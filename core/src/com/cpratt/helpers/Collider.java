@@ -16,6 +16,7 @@ public class Collider {
         // Example: Player collides with block top, player's y velocity should be 0 and y pos should match block y + player height
         for (Block block : blocks) {
             if (collides(player.getPosition(), player.getBounds(), block)) {
+                System.out.println("COLLIDES");
 
                 // Calculate overlaps between player and colliding block. Used to determine player final destination relative to block
                 float xOverlapLeft = Math.abs(player.getPosition().x + GS.PLAYER_WIDTH - block.getPosition().x);
@@ -27,8 +28,8 @@ public class Collider {
                 float xOverlap = xOverlapLeft < xOverlapRight ? xOverlapLeft : xOverlapRight;
                 float yOverlap = yOverlapTop < yOverlapBottom ? yOverlapTop : yOverlapBottom;
 
-                System.out.println("yOverlap: " + yOverlap);
-                System.out.println("xOverlap: " + xOverlap);
+//                System.out.println("yOverlap: " + yOverlap);
+//                System.out.println("xOverlap: " + xOverlap);
 
                 // Slightly favor y since block top collisions are most common
                 if (yOverlap < xOverlap + 1) {
@@ -69,7 +70,7 @@ public class Collider {
         }
 
         if (!collision) {
-            System.out.println("MOVING");
+//            System.out.println("MOVING");
             if (player.isRightKeyPressed()) {
                 player.moveRight();
             }

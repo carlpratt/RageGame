@@ -21,7 +21,10 @@ public class GS {
     public static int BLOCK_HEIGHT = 20;
     public static int BLOCK_WIDTH = 20;
 
-    public static int PLAYER_START_X = 100;
-    public static int PLAYER_START_Y = 100;
+    public static int PLAYER_START_X = 60;
+    public static int PLAYER_START_Y = 200;
+
+    // Camera
+    public static int CAMERA_OFFSET_X = 100;
 
 }
