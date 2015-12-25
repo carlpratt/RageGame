@@ -10,7 +10,7 @@
 b    bbbbbb         b
     bbbbbbb         d
    bbbbbbbb
-bbbbbbbbbbbbbbbbbbbbbbb
+bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
 
 
 24x16

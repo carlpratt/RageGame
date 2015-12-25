@@ -3,6 +3,7 @@ package com.cpratt.gameworld;
 import com.badlogic.gdx.Gdx;
 import com.cpratt.gameobjects.Block;
 import com.cpratt.gameobjects.Player;
+import com.cpratt.helpers.Collider;
 import com.cpratt.settings.GS;
 
 import java.io.BufferedReader;
@@ -23,6 +24,7 @@ public class GameWorld {
 
     public void update(float delta) {
         player.update(delta, blocks);
+        Collider.handleCollisions(player, blocks, delta);
     }
 
     public Player getPlayer() {

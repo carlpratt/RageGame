@@ -1,0 +1,14 @@
+1. Allow for dynamic loading of levels.
+    - Right now it is designed to only load bricks (blocks)
+    - Means I also need to get some new asset ideas
+        - Actually...nothing really needs to change if all the assets are the same size as a block (20x20)
+            - I like this idea I'm keeping it
+2. Add screen transitions
+    - Think I Wanna Be The Guy
+3. Add the ragey stuff...
+4. Add player rotations and animations
+    - Rotations: DONE
+    - Animations: NOT STARTED
+5. Consider building a collider class so collision detection doesn't need to be handled in player class
+    - DONE
+6. Methodize the classes. Less public variable access between classes.
