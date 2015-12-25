@@ -1,7 +1,6 @@
 package com.cpratt.gameworld;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.Animation;
@@ -14,7 +13,6 @@ import com.cpratt.helpers.AssetLoader;
 import com.cpratt.settings.GS;
 
 import java.io.BufferedReader;
-import java.io.FileReader;
 
 public class GameRenderer {
 

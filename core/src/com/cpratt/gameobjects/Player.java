@@ -18,6 +18,8 @@ public class Player {
     private boolean leftKeyPressed = false;
     private boolean upKeyPressed = false;
 
+    private boolean alive = true;
+
     public Player(float x, float y) {
         position = new Vector2(x, y);
         velocity = new Vector2(0, 0);
@@ -25,14 +27,14 @@ public class Player {
         bounds = new Rectangle();
     }
 
-    public void update(float delta, List<Block> blocks) {
+    public void update(float delta) {
 
         // Calculate new vectors and update the bounding rectangle to match
         velocity.add(acceleration.cpy().scl(delta));
         position.add(velocity.cpy().scl(delta));
         bounds.set(position.x, position.y, GS.PLAYER_WIDTH, GS.PLAYER_HEIGHT);
-        System.out.println(position);
-        System.out.println();
+//        System.out.println(position);
+//        System.out.println();
     }
 
     public void jump() {
@@ -65,6 +67,10 @@ public class Player {
         return position;
     }
 
+    public void setPosition(Vector2 position) {
+        this.position = position;
+    }
+
     public Vector2 getVelocity() {
         return velocity;
     }
@@ -95,5 +101,13 @@ public class Player {
 
     public void setUpKeyPressed(boolean upKeyPressed) {
         this.upKeyPressed = upKeyPressed;
+    }
+
+    public boolean isAlive() {
+        return alive;
+    }
+
+    public void setAlive(boolean alive) {
+        this.alive = alive;
     }
 }

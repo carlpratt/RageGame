@@ -1,5 +1,6 @@
 package com.cpratt.helpers;
 
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputProcessor;
 import com.cpratt.gameobjects.Player;
 
@@ -20,21 +21,20 @@ public class InputHandler implements InputProcessor {
     @Override
     public boolean keyDown(int keycode) {
         switch (keycode) {
-            // TODO: Find out what class these enums exist in
-            case 19 :
+            case Input.Keys.DPAD_UP :
                 player.setUpKeyPressed(true);
                 if (player.getVelocity().y == 0) {
                     player.jump();
                 }
                 break;
-            case 21 :
+            case Input.Keys.DPAD_LEFT :
                 player.setLeftKeyPressed(true);
                 if (player.isRightKeyPressed())
                     player.stopMoving();
                 else
                     player.moveLeft();
                 break;
-            case 22 :
+            case Input.Keys.DPAD_RIGHT :
                 player.setRightKeyPressed(true);
                 if (player.isLeftKeyPressed())
                     player.stopMoving();
@@ -50,17 +50,17 @@ public class InputHandler implements InputProcessor {
     @Override
     public boolean keyUp(int keycode) {
         switch (keycode) {
-            case 19 :
+            case Input.Keys.DPAD_UP :
                 player.setUpKeyPressed(false);
                 break;
-            case 21 :
+            case Input.Keys.DPAD_LEFT :
                 player.setLeftKeyPressed(false);
                 if (player.isRightKeyPressed())
                     player.moveRight();
                 else
                     player.stopMoving();
                 break;
-            case 22 :
+            case Input.Keys.DPAD_RIGHT :
                 player.setRightKeyPressed(false);
                 if (player.isLeftKeyPressed())
                     player.moveLeft();

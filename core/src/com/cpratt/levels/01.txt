@@ -2,14 +2,14 @@
 
 
 
-          b    b    b
-         bb         b
-        bbb         b
-       bbbb         b
-      bbbbb         b
-b    bbbbbb         b
-    bbbbbbb         d
-                      bb                     bb
+
+
+
+
+
+
+
+                  c
 bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
 
 

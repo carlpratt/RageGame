@@ -12,3 +12,5 @@
 5. Consider building a collider class so collision detection doesn't need to be handled in player class
     - DONE
 6. Methodize the classes. Less public variable access between classes.
+7. Add player death
+    - Base: DONE
