@@ -18,7 +18,9 @@ public class InputHandler implements InputProcessor {
     @Override
     public boolean touchDown(int screenX, int screenY, int pointer, int button) {
         if (world.isGameOver()) {
-            world.restart();
+            world.respawn();
+        } else if (world.isWon()) {
+            world.restart(); // should advance to the next level
         }
         return true;
     }

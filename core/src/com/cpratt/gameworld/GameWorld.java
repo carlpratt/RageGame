@@ -1,15 +1,13 @@
 package com.cpratt.gameworld;
 
-import com.badlogic.gdx.math.Vector2;
 import com.cpratt.gameobjects.Block;
 import com.cpratt.gameobjects.Player;
+import com.cpratt.gameobjects.TrapBlock;
 import com.cpratt.helpers.Collider;
 import com.cpratt.helpers.LevelBuilder;
 import com.cpratt.settings.GS;
 
 import java.util.List;
-import java.util.concurrent.TimeUnit;
-import java.util.logging.Level;
 
 public class GameWorld {
 
@@ -20,7 +18,7 @@ public class GameWorld {
     private GameState currentState;
 
     public enum GameState {
-        READY, RUNNING, GAMEOVER
+        READY, RUNNING, GAMEOVER, WIN
     }
 
     public GameWorld() {
@@ -38,8 +36,10 @@ public class GameWorld {
                 updateRunning(delta);
                 break;
             case GAMEOVER:
-//                restart();
+//                restart(); // Don't want to do this because we currently wait for player input to continue
                 break;
+            case WIN:
+                //nothing
             default:
                 break;
         }
@@ -59,6 +59,9 @@ public class GameWorld {
 
         if (!player.isAlive()) {
             currentState = GameState.GAMEOVER;
+            // WIN condition
+        } else if (player.getPosition().x > 600) {
+            currentState = GameState.WIN;
         }
     }
 
@@ -70,21 +73,26 @@ public class GameWorld {
         currentState = GameState.RUNNING;
     }
 
-    public void restart() {
-        try {
-//            Thread.sleep(1000);
-        } catch (Exception e) {
-            // nothing
-        }
+    public void respawn() {
         player.reset();
-        blocks = LevelBuilder.buildLevel();
-//        blocks = LevelBuilder.buildLevel();
         currentState = GameState.RUNNING;
-
+    }
+    public void restart() {
+        player.reset();
+        currentState = GameState.RUNNING;
+        for (Block block : blocks) {
+            if (block instanceof TrapBlock) {
+                ((TrapBlock) block).setTriggered(false);
+            }
+        }
     }
 
     public boolean isGameOver() {
         return currentState == GameState.GAMEOVER;
+    }
+
+    public boolean isWon() {
+        return currentState == GameState.WIN;
     }
 
     public Player getPlayer() {

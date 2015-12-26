@@ -16,11 +16,13 @@ public class Collider {
         // For every asset, determine if there was a collision, and handle player vectors appropriately.
         // Example: Player collides with block top, player's y velocity should be 0 and y pos should match block y + player height
         for (Block block : blocks) {
-            if (collides(player.getPosition(), player.getBounds(), block)) {
+            if (collides(player.getBounds(), block.getBounds())) {
 //                System.out.println("COLLIDES");
 
                 if (block instanceof TrapBlock) {
+                    ((TrapBlock) block).setTriggered(true);
                     player.setAlive(false);
+                    break;
                 }
 
                 // Calculate overlaps between player and colliding block. Used to determine player final destination relative to block
@@ -69,7 +71,7 @@ public class Collider {
         boolean collision = false;
 
         for (Block b : blocks) {
-            if (collides(tmpPos, tmpBounds, b))
+            if (collides(tmpBounds, b.getBounds()))
                 collision = true;
         }
 
@@ -93,10 +95,10 @@ public class Collider {
     /**
      * Determine if collision has happened. Only calculate collision if block is within range of player.
      */
-    private static boolean collides(Vector2 position, Rectangle bounds, Block block) {
-        if (Math.abs(position.x - block.getPosition().x) <= GS.BLOCK_WIDTH
-                && Math.abs(position.y - block.getPosition().y) <= GS.BLOCK_HEIGHT) {
-            return (Intersector.overlaps(bounds, block.getBounds()));
+    private static boolean collides(Rectangle playerBounds, Rectangle blockBounds) {
+        if (Math.abs(playerBounds.x - blockBounds.x) <= GS.BLOCK_WIDTH
+                && Math.abs(playerBounds.y - blockBounds.y) <= GS.BLOCK_HEIGHT) {
+            return (Intersector.overlaps(playerBounds, blockBounds));
         }
         return false;
     }

@@ -9,8 +9,8 @@
 
 
 
-              c       c
-bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+       b       c       c
+bbbbbbbbbbcbbbbbbbbbbbbbbbbbb
 
 
 24x16
